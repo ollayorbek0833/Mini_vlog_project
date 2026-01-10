@@ -1,0 +1,20 @@
+import socket
+from vlog_project.config.settings import HOST, PORT
+from vlog_project.socket_connection.router import handle_request
+
+
+def server():
+    # ---------------- SOCKET SERVER ----------------
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind((HOST, PORT))
+    s.listen(1)
+
+    print(f"Server ishga tushdi: http://{HOST}:{PORT}")
+
+    while True:
+        client_socket, addr = s.accept()
+        request = client_socket.recv(8192)
+
+        response = handle_request(request)
+        client_socket.sendall(response.encode())
+        client_socket.close()
