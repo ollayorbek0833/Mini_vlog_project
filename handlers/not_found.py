@@ -1,4 +1,4 @@
-from vlog_project.utils.response import response
+from utils.response import response
 
 
 def not_found():

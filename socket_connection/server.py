@@ -1,6 +1,6 @@
 import socket
-from vlog_project.config.settings import HOST, PORT
-from vlog_project.socket_connection.router import handle_request
+from config.settings import HOST, PORT
+from socket_connection.router import handle_request
 
 
 def server():

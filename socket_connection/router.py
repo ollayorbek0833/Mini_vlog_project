@@ -1,5 +1,5 @@
-from vlog_project.handlers.not_found import not_found
-from vlog_project.handlers.post import post_list, create_post, delete_post, get_post
+from handlers.not_found import not_found
+from handlers.post import post_list, create_post, delete_post, get_post
 
 
 def handle_request(raw_request:bytes) -> bytes:

@@ -1,9 +1,9 @@
 from urllib.parse import parse_qs
 
-from vlog_project.db.connection import get_vlogs, add_vlog, delete_vlog, get_vlog_by_id
-from vlog_project.handlers.not_found import not_found
-from vlog_project.utils.redirect import redirect
-from vlog_project.utils.response import response
+from db.connection import get_vlogs, add_vlog, delete_vlog, get_vlog_by_id
+from handlers.not_found import not_found
+from utils.redirect import redirect
+from utils.response import response
 
 
 def post_list():
