@@ -60,6 +60,13 @@ def delete_vlog(vlog_id):
     print("deleted")
     db.close()
 
+def update_vlog(vlog_id, title, description):
+    db = DBManager()
+    db.execute("UPDATE vlogs SET title = %s, description = %s WHERE id = %s",(title, description, vlog_id))
+    print(vlog_id)
+    print("updated")
+    db.close()
+
 def get_vlog_by_id(vlog_id):
     db = DBManager()
     vlog =  db.execute("SELECT id, title, description, created_at FROM vlogs WHERE id = %s", (vlog_id,),fetch = "one",)

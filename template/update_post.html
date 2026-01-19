@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Vlog</title>
+</head>
+<body>
+  <h2>Edit Vlog</h2>
+
+  <p><b>ID:</b> {{ID}}</p>
+  <p><b>Created:</b> {{TIME}}</p>
+
+  <form action="/update" method="POST">
+    <!-- keep id hidden so user doesn't edit it -->
+    <input type="hidden" name="vlog_id" value="{{ID}}" />
+
+    <div>
+      <label>Title</label><br />
+      <input type="text" name="title" value="{{TITLE}}" required />
+    </div>
+
+    <br />
+
+    <div>
+      <label>Description</label><br />
+      <textarea name="desc" rows="7" required>{{DESC}}</textarea>
+    </div>
+
+    <br />
+
+    <button type="submit">Save</button>
+  </form>
+
+  <br />
+  <a href="/">Back</a>
+</body>
+</html>

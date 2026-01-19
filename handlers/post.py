@@ -1,6 +1,6 @@
 from urllib.parse import parse_qs
 
-from db.connection import get_vlogs, add_vlog, delete_vlog, get_vlog_by_id
+from db.connection import get_vlogs, add_vlog, delete_vlog, get_vlog_by_id, update_vlog
 from handlers.not_found import not_found
 from utils.redirect import redirect
 from utils.response import response
@@ -64,23 +64,26 @@ def get_post(id):
     vlog = get_vlog_by_id(id)
     if not vlog:
         return not_found()
-    db_id, title,desc, time = vlog
 
-    body = f"""
-        <html>
-          <head>
-            <title>{title}</title>
-          </head>
-          <body>
-            <a href="/">⬅ Back</a>
-            <h1>{title}</h1>
-            <p>{desc}</p>
-            <small>{time}</small>
-          </body>
-        </html>
-        """
+    db_id, title, desc, time = vlog
+
+    with open("template/update_post.html", "r", encoding="utf-8") as f:
+        body = f.read()
+
+    body = (body
+            .replace("{{ID}}", str(db_id))
+            .replace("{{TITLE}}", title)
+            .replace("{{DESC}}", desc)
+            .replace("{{TIME}}", str(time)))
+
     return response(body)
 
+def update_post(id, title, desc):
+    vlog = get_vlog_by_id(id)
+    if not vlog:
+        return not_found()
+    update_vlog(id, title, desc)
+    return redirect('/')
 
 def delete_post(id):
     delete_vlog(id)

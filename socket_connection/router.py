@@ -1,5 +1,9 @@
+from urllib.parse import parse_qs
+
+from db.connection import update_vlog
 from handlers.not_found import not_found
-from handlers.post import post_list, create_post, delete_post, get_post
+from handlers.post import post_list, create_post, delete_post, get_post, update_post
+from utils.redirect import redirect
 
 
 def handle_request(raw_request:bytes) -> bytes:
@@ -26,5 +30,13 @@ def handle_request(raw_request:bytes) -> bytes:
         vlog_id = int(path.split("=",1)[1])
         return get_post(vlog_id)
 
+    if method == "POST" and path == "/update":
+        data = parse_qs(body)
+
+        vlog_id = int(data["vlog_id"][0])
+        title = data["title"][0]
+        desc = data["desc"][0]
+
+        return update_post(vlog_id, title, desc)
 
     return not_found()
